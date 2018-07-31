@@ -56,6 +56,16 @@ describe("entryFacade", function() {
             expect(usernameField).to.have.property("removeable", false);
             expect(miscField).to.have.property("removeable", true);
         });
+
+        it("sets field orders to the correct order", function() {
+            const facade = createEntryFacade(this.entry);
+            const titleField = facade.fields.find(f => f.property === "title");
+            const usernameField = facade.fields.find(f => f.property === "username");
+            const passwordField = facade.fields.find(f => f.property === "password");
+            expect(titleField).to.have.property("order", 0);
+            expect(usernameField).to.have.property("order", 1);
+            expect(passwordField).to.have.property("order", 2);
+        });
     });
 
     describe("consumeEntryFacade", function() {
