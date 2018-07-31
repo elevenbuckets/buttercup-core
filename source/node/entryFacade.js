@@ -1,6 +1,6 @@
 const Entry = require("./Entry.js");
 const facadeFieldFactories = require("./entryFacadeFields.js");
-const { createFieldDescriptor } = require("./tools/entry.js");
+const { createFieldDescriptor, resetFieldOrders } = require("./tools/entry.js");
 
 /**
  * Add extra fields to a fields array that are not mentioned in a preset
@@ -102,7 +102,7 @@ function createEntryFacade(entry) {
     const fields = createFields(entry);
     return {
         type: facadeType,
-        fields: addExtraFieldsNonDestructive(entry, fields)
+        fields: resetFieldOrders(addExtraFieldsNonDestructive(entry, fields))
     };
 }
 

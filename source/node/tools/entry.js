@@ -18,7 +18,7 @@ const URL_PROP_ICON = /icon[\s_-]*ur[li]/i;
  * @property {Boolean} secret - Wether or not the value should be hidden while viewing (masked)
  * @property {Boolean} multiline - Whether the value should be edited as a multiline value or not
  * @property {Object|Boolean} formatting - Vendor formatting options object, or false if no formatting necessary
- * @property {Number} maxLength - Maximum recommended length of the value (defaults to -1)
+ * @property {Number} order The sort order of the field (lowest to highest)
  */
 
 /**
@@ -35,7 +35,7 @@ function createFieldDescriptor(
     title,
     entryPropertyType,
     entryPropertyName,
-    { multiline = false, secret = false, formatting = false, removeable = false } = {}
+    { multiline = false, secret = false, formatting = false, removeable = false, order = 1000 } = {}
 ) {
     const value = getEntryValue(entry, entryPropertyType, entryPropertyName);
     return {
@@ -46,7 +46,8 @@ function createFieldDescriptor(
         secret,
         multiline,
         formatting,
-        removeable
+        removeable,
+        order
     };
 }
 
@@ -140,6 +141,19 @@ function isValidProperty(name) {
     return false;
 }
 
+/**
+ * Reset all field orders as they appear
+ * This method mutates the original array
+ * @param {Array.<EntryFacadeField>} fields An array of fields
+ * @returns {Array.<EntryFacadeField>} The original array
+ */
+function resetFieldOrders(fields) {
+    fields.forEach((field, ind) => {
+        field.order = ind;
+    });
+    return fields;
+}
+
 module.exports = {
     ENTRY_URL_TYPE_ANY,
     ENTRY_URL_TYPE_GENERAL,
@@ -149,5 +163,6 @@ module.exports = {
     getEntryURLs,
     getEntryFacadeURLs,
     getEntryValue,
-    isValidProperty
+    isValidProperty,
+    resetFieldOrders
 };
