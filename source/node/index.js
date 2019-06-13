@@ -1,5 +1,4 @@
 const iocane = require("iocane");
-const webdavFS = require("webdav-fs");
 const OriginalArchiveManager = require("./system/ArchiveManager.js");
 
 OriginalArchiveManager.v2 = {
@@ -24,12 +23,7 @@ module.exports = {
     DatasourceAdapter: require("./system/DatasourceAdapter.js"),
     TextDatasource: require("./system/TextDatasource.js"),
     FileDatasource: require("./system/FileDatasource.js"),
-    OwnCloudDatasource: require("./system/OwnCloudDatasource.js"),
-    NextcloudDatasource: require("./system/NextcloudDatasource.js"),
-    WebDAVDatasource: require("./system/WebDAVDatasource.js"),
-    BoxDatasource: require("./system/BoxDatasource.js"),
     MyButtercupDatasource: require("./system/MyButtercupDatasource.js"),
-    DropboxDatasource: require("./system/DropboxDatasource.js"),
 
     Flattener: require("./system/Flattener.js"),
     Descriptor: require("./system/Descriptor.js"),
@@ -57,7 +51,6 @@ module.exports = {
     },
 
     vendor: {
-        iocane,
-        webdavFS
+        iocane
     }
 };
